@@ -66,6 +66,6 @@ public class Tondeuse {
 
     @Override
     public String toString() {
-        return position.getX() + " " + position.getY() + " " + orientation.getCode();
+        return position.getX() + " " + position.getY() + " " + orientation.getCode() + " ";
     }
 }

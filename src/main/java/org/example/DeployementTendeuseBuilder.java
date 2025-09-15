@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 
 /**
- * Classe RBuilder responsable de la fabrication des différents composants du système de tondeuse automatique
+ * Classe Builder responsable de la fabrication des différents composants du système de tondeuse automatique
  */
 @RequiredArgsConstructor
 @Getter
@@ -44,7 +44,7 @@ public class DeployementTendeuseBuilder {
         } catch (NumberFormatException e) {
             throw new LigneInvalideException("Les dimensions doivent être des entiers valides: " + Arrays.toString(dimensions));
         }
-        return new OrchestrateurTondeuses(pelouse);
+        return new OrchestrateurTondeuses(pelouse, new EtatTondeusePrinter());
     }
 
     public Tondeuse buildTondeuse() throws IOException {

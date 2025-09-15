@@ -1,19 +1,20 @@
 package org.example;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.example.Exceptions.CommandeInvalideException;
 
 /**
  * Classe responsable du pilotage de la tondeuse sur la pelouse
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Setter
 @Getter
 public class OrchestrateurTondeuses {
 
-    private Pelouse pelouse;
+    private final Pelouse pelouse;
+    private final EtatTondeusePrinter etatTondeusePrinter;
 
     public void executerTendeuse(Tondeuse tondeuse, String commandes) {
         for (char cmd : commandes.toCharArray()) {
@@ -26,7 +27,7 @@ public class OrchestrateurTondeuses {
                     break;
                 case 'A': {
                     Position prochaine = tondeuse.getProchainPosition();
-                    if (pelouse.estDansLimites(prochaine)) {
+                    if (this.pelouse.estDansLimites(prochaine)) {
                         tondeuse.setPosition(prochaine);
                     }
                     break;
@@ -35,6 +36,7 @@ public class OrchestrateurTondeuses {
                     throw new CommandeInvalideException(" la commande '" + cmd + "' est invalide");
             }
         }
+        this.etatTondeusePrinter.afficherEtatConsole(tondeuse);
     }
 
 }

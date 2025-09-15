@@ -19,7 +19,7 @@ public class OrchestrateurTondeusesTest {
         pelouse = mock(Pelouse.class);
         tondeuse = mock(Tondeuse.class);
         etatTondeusePrinter = mock(EtatTondeusePrinter.class);
-        orchestrateurTondeuses = new OrchestrateurTondeuses(pelouse);
+        orchestrateurTondeuses = new OrchestrateurTondeuses(pelouse, etatTondeusePrinter);
     }
 
     @Test
