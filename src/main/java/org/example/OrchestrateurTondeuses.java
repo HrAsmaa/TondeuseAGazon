@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.Exceptions.CommandeInvalideException;
 
+/**
+ * Classe responsable du pilotage de la tondeuse sur la pelouse
+ */
 @AllArgsConstructor
 @Setter
 @Getter

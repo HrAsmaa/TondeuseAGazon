@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.Enumerations.Orientation;
 
+/**
+ * classe représentant la tondeuse avec une position et une orientation
+ */
 @Getter
 @Setter
 @AllArgsConstructor

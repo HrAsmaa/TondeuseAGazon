@@ -14,12 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DeployementTendeuseBuilderTest {
 
-    private static Path tempFile;
     private static DeployementTendeuseBuilder builder;
 
     @BeforeAll
     static void setUp() throws IOException {
-        tempFile = Files.createTempFile("builderTest", ".txt");
+        Path tempFile = Files.createTempFile("builderTest", ".txt");
         try (BufferedWriter writer = Files.newBufferedWriter(tempFile)) {
             // Pelouse valide
             writer.write("5 5\n");
@@ -34,6 +33,10 @@ public class DeployementTendeuseBuilderTest {
             // comandes invalide
             writer.write(
                     "AGD 1\n");
+            // Pelouse incomplet
+            writer.write("5\n");
+            // Tondeuse incomplet
+            writer.write("1 G\n");
         }
 
         builder = new DeployementTendeuseBuilder(tempFile);
@@ -41,7 +44,7 @@ public class DeployementTendeuseBuilderTest {
 
     @Test
     @Order(1)
-    void buildOrchestrateurTendeuse_dataCorrect_ShouldReturnOrchestrateurTendeuse() {
+    void buildOrchestrateurTendeuse_dataCorrect_ShouldReturnOrchestrateurTendeuse() throws IOException {
         OrchestrateurTondeuses orchestrateurTondeuses = builder.buildOrchestrateurTendeuse();
         assertNotNull(orchestrateurTondeuses);
         assertNotNull(orchestrateurTondeuses.getPelouse());
@@ -51,7 +54,7 @@ public class DeployementTendeuseBuilderTest {
 
     @Test
     @Order(2)
-    void buildTondeuse_dataCorrect_ShouldReturnTondeuse() {
+    void buildTondeuse_dataCorrect_ShouldReturnTondeuse() throws IOException {
         Tondeuse tondeuse = builder.buildTondeuse();
         assertNotNull(tondeuse);
         assertNotNull(tondeuse.getPosition());
@@ -64,7 +67,7 @@ public class DeployementTendeuseBuilderTest {
 
     @Test
     @Order(3)
-    void buildCommandesTendeuse_dataCorrect_ShouldReturnCommandes() {
+    void buildCommandesTendeuse_dataCorrect_ShouldReturnCommandes() throws IOException {
         String commandesTondeuse = builder.buildCommandesTendeuse();
         assertEquals("AGD", commandesTondeuse);
     }
@@ -86,5 +89,31 @@ public class DeployementTendeuseBuilderTest {
     @Order(6)
     void buildCommandesTendeuse_dataIncorrect_ShouldThrowException() {
         assertThrows(LigneInvalideException.class, () -> builder.buildCommandesTendeuse());
+    }
+
+    @Test
+    @Order(7)
+    void buildOrchestrateurTendeuse_dataIncomplet_ShouldThrowException() {
+        assertThrows(LigneInvalideException.class, () -> builder.buildOrchestrateurTendeuse());
+
+    }
+
+    @Test
+    @Order(8)
+    void buildTondeuse_dataIncomplet_ShouldThrowException() {
+        assertThrows(LigneInvalideException.class, () -> builder.buildTondeuse());
+    }
+
+    @Test
+    @Order(7)
+    void buildOrchestrateurTendeuse_ligneVide_ShouldThrowException() {
+        assertThrows(LigneInvalideException.class, () -> builder.buildOrchestrateurTendeuse());
+
+    }
+
+    @Test
+    @Order(8)
+    void buildTondeuse_ligneVide_ShouldThrowException() {
+        assertThrows(LigneInvalideException.class, () -> builder.buildTondeuse());
     }
 }
