@@ -32,7 +32,7 @@ public class DeployementTendeuseBuilder {
     public OrchestrateurTondeuses buildOrchestrateurTendeuse() throws IOException {
         String ligne = reader.readLine();
         if (ligne == null) {
-            throw new LigneInvalideException("Ligne vide");
+            return null;
         }
         String[] dimensions = ligne.split(" ");
         if (dimensions.length != 2) {
@@ -49,8 +49,8 @@ public class DeployementTendeuseBuilder {
 
     public Tondeuse buildTondeuse() throws IOException {
         String lignePosition = reader.readLine();
-        if (lignePosition == null || lignePosition.trim().isEmpty()) {
-            throw new LigneInvalideException("Ligne vide");
+        if (lignePosition == null) {
+            return null;
         }
         String[] coordonees = lignePosition.split(" ");
         if (coordonees.length != 3) {
@@ -69,8 +69,8 @@ public class DeployementTendeuseBuilder {
 
     public String buildCommandesTendeuse() throws IOException {
         String commandes = reader.readLine();
-        if (commandes == null || commandes.trim().isEmpty()) {
-            throw new LigneInvalideException("Ligne vide");
+        if (commandes == null) {
+            return null;
         }
         for (char c : commandes.toCharArray()) {
             try {

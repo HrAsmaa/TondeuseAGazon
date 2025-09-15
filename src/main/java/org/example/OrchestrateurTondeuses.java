@@ -17,23 +17,25 @@ public class OrchestrateurTondeuses {
     private final EtatTondeusePrinter etatTondeusePrinter;
 
     public void executerTendeuse(Tondeuse tondeuse, String commandes) {
-        for (char cmd : commandes.toCharArray()) {
-            switch (cmd) {
-                case 'G':
-                    tondeuse.tournerGauche();
-                    break;
-                case 'D':
-                    tondeuse.tournerDroite();
-                    break;
-                case 'A': {
-                    Position prochaine = tondeuse.getProchainPosition();
-                    if (this.pelouse.estDansLimites(prochaine)) {
-                        tondeuse.setPosition(prochaine);
+        if (commandes != null) {
+            for (char cmd : commandes.toCharArray()) {
+                switch (cmd) {
+                    case 'G':
+                        tondeuse.tournerGauche();
+                        break;
+                    case 'D':
+                        tondeuse.tournerDroite();
+                        break;
+                    case 'A': {
+                        Position prochaine = tondeuse.getProchainPosition();
+                        if (this.pelouse.estDansLimites(prochaine)) {
+                            tondeuse.setPosition(prochaine);
+                        }
+                        break;
                     }
-                    break;
+                    default:
+                        throw new CommandeInvalideException(" la commande '" + cmd + "' est invalide");
                 }
-                default:
-                    throw new CommandeInvalideException(" la commande '" + cmd + "' est invalide");
             }
         }
         this.etatTondeusePrinter.afficherEtatConsole(tondeuse);

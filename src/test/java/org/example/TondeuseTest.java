@@ -156,7 +156,7 @@ public class TondeuseTest {
         Position positionActuel = new Position(3, 2);
         tondeuse = new Tondeuse(positionActuel, Orientation.SUD);
         String position = tondeuse.toString();
-        assertEquals("3 2 S", position);
+        assertEquals("3 2 S ", position);
     }
 
 }

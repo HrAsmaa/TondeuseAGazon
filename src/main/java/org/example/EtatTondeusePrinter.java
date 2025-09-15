@@ -8,6 +8,6 @@ public class EtatTondeusePrinter {
         if (tondeuse == null) {
             throw new NullPointerException("tondeusse est null");
         }
-        System.out.println(tondeuse);
+        System.out.print(tondeuse);
     }
 }

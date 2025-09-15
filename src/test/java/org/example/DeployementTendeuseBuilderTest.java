@@ -105,15 +105,23 @@ public class DeployementTendeuseBuilderTest {
     }
 
     @Test
-    @Order(7)
-    void buildOrchestrateurTendeuse_ligneVide_ShouldThrowException() {
-        assertThrows(LigneInvalideException.class, () -> builder.buildOrchestrateurTendeuse());
-
+    @Order(9)
+    void buildOrchestrateurTendeuse_ligneVide_ShouldReturnNull() throws IOException {
+        OrchestrateurTondeuses orchestrateurTondeuses = builder.buildOrchestrateurTendeuse();
+        assertNull(orchestrateurTondeuses);
     }
 
     @Test
-    @Order(8)
-    void buildTondeuse_ligneVide_ShouldThrowException() {
-        assertThrows(LigneInvalideException.class, () -> builder.buildTondeuse());
+    @Order(10)
+    void buildTondeuse_ligneVide_ShouldReturnNull() throws IOException {
+        Tondeuse tondeuse = builder.buildTondeuse();
+        assertNull(tondeuse);
+    }
+
+    @Test
+    @Order(11)
+    void buildCommandes_ligneVide_ShouldReturnNull() throws IOException {
+        String commmandes = builder.buildCommandesTendeuse();
+        assertNull(commmandes);
     }
 }
