@@ -12,11 +12,13 @@ public class OrchestrateurTondeusesTest {
     private OrchestrateurTondeuses orchestrateurTondeuses;
     private Pelouse pelouse;
     private Tondeuse tondeuse;
+    private EtatTondeusePrinter etatTondeusePrinter;
 
     @BeforeEach
     void setUp() {
         pelouse = mock(Pelouse.class);
         tondeuse = mock(Tondeuse.class);
+        etatTondeusePrinter = mock(EtatTondeusePrinter.class);
         orchestrateurTondeuses = new OrchestrateurTondeuses(pelouse);
     }
 
@@ -30,6 +32,8 @@ public class OrchestrateurTondeusesTest {
         verify(pelouse, times(1)).estDansLimites(position);
         verify(tondeuse, times(1)).getProchainPosition();
         verify(tondeuse, times(1)).setPosition(position);
+        verify(etatTondeusePrinter, times(1)).afficherEtatConsole(tondeuse);
+
         verifyNoMoreInteractions(tondeuse);
         verifyNoMoreInteractions(pelouse);
     }
@@ -43,6 +47,7 @@ public class OrchestrateurTondeusesTest {
         orchestrateurTondeuses.executerTendeuse(tondeuse, "A");
         verify(pelouse, times(1)).estDansLimites(position);
         verify(tondeuse, times(1)).getProchainPosition();
+        verify(etatTondeusePrinter, times(1)).afficherEtatConsole(tondeuse);
         verifyNoMoreInteractions(tondeuse);
         verifyNoMoreInteractions(pelouse);
     }
@@ -51,6 +56,7 @@ public class OrchestrateurTondeusesTest {
     void executerTendeuse_Droite_ShouldCallTournerDroite() {
         orchestrateurTondeuses.executerTendeuse(tondeuse, "D");
         verify(tondeuse, times(1)).tournerDroite();
+        verify(etatTondeusePrinter, times(1)).afficherEtatConsole(tondeuse);
         verifyNoMoreInteractions(tondeuse);
         verifyNoMoreInteractions(pelouse);
     }
@@ -59,6 +65,7 @@ public class OrchestrateurTondeusesTest {
     void executerTendeuse_Gauche_ShouldCallTournerGauche() {
         orchestrateurTondeuses.executerTendeuse(tondeuse, "G");
         verify(tondeuse, times(1)).tournerGauche();
+        verify(etatTondeusePrinter, times(1)).afficherEtatConsole(tondeuse);
         verifyNoMoreInteractions(tondeuse);
         verifyNoMoreInteractions(pelouse);
     }
@@ -75,6 +82,7 @@ public class OrchestrateurTondeusesTest {
         verify(tondeuse, times(1)).setPosition(position);
         verify(tondeuse, times(2)).tournerGauche();
         verify(tondeuse, times(1)).tournerDroite();
+        verify(etatTondeusePrinter, times(1)).afficherEtatConsole(tondeuse);
 
         verifyNoMoreInteractions(tondeuse);
         verifyNoMoreInteractions(pelouse);
