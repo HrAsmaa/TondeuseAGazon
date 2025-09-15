@@ -1,14 +1,17 @@
 package org.example;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * Représente une position bidimensionnelle
+ */
+@AllArgsConstructor
+@Setter
+@Getter
 public class Position {
-    public Position(int x, int y) {
-    }
+    int x;
+    int y;
 
-    public int getX() {
-        return 0;
-    }
-
-    public int getY() {
-        return 0;
-    }
 }
