@@ -1,8 +1,10 @@
 package org.example;
 
+import org.example.Exceptions.CommandeInvalideException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class OrchestrateurTondeusesTest {
@@ -77,4 +79,10 @@ public class OrchestrateurTondeusesTest {
         verifyNoMoreInteractions(tondeuse);
         verifyNoMoreInteractions(pelouse);
     }
+
+    @Test
+    void executerTendeuse_CommandeInvalide_ShouldThrowException() {
+        assertThrows(CommandeInvalideException.class, () -> orchestrateurTondeuses.executerTendeuse(tondeuse, "B"));
+    }
+
 }

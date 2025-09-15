@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Enumerations;
 
 public enum Orientation {
     NORD("N"),

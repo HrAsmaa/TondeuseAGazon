@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Enumerations.Orientation;
+import org.example.Exceptions.LigneInvalideException;
 import org.junit.jupiter.api.*;
 
 import java.io.BufferedWriter;
