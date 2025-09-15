@@ -20,21 +20,21 @@ public class OrchestrateurTondeusesTest {
 
     @Test
     void executerTendeuse_positionDansLimites_ShouldSetNouvellePosition() {
-        Position position = new Position(1,4);
+        Position position = new Position(1, 4);
         when(pelouse.estDansLimites(position)).thenReturn(true);
         when(tondeuse.getProchainPosition()).thenReturn(position);
 
         orchestrateurTondeuses.executerTendeuse(tondeuse, "A");
         verify(pelouse, times(1)).estDansLimites(position);
         verify(tondeuse, times(1)).getProchainPosition();
-        verify(tondeuse, times(1)).setNouvellePosition(position);
+        verify(tondeuse, times(1)).setPosition(position);
         verifyNoMoreInteractions(tondeuse);
         verifyNoMoreInteractions(pelouse);
     }
 
     @Test
     void executerTendeuse_positionHorsLimites_ShouldNotSetNouvellePosition() {
-        Position position = new Position(1,4);
+        Position position = new Position(1, 4);
         when(pelouse.estDansLimites(position)).thenReturn(false);
         when(tondeuse.getProchainPosition()).thenReturn(position);
 
@@ -63,14 +63,14 @@ public class OrchestrateurTondeusesTest {
 
     @Test
     void executerTendeuse_sequenceDeCommandes_ShouldCallToutesActions() {
-        Position position = new Position(1,4);
+        Position position = new Position(1, 4);
         when(pelouse.estDansLimites(position)).thenReturn(true);
         when(tondeuse.getProchainPosition()).thenReturn(position);
 
         orchestrateurTondeuses.executerTendeuse(tondeuse, "AGDG");
         verify(pelouse, times(1)).estDansLimites(position);
         verify(tondeuse, times(1)).getProchainPosition();
-        verify(tondeuse, times(1)).setNouvellePosition(position);
+        verify(tondeuse, times(1)).setPosition(position);
         verify(tondeuse, times(2)).tournerGauche();
         verify(tondeuse, times(1)).tournerDroite();
 

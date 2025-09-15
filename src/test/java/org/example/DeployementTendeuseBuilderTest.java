@@ -31,7 +31,7 @@ public class DeployementTendeuseBuilderTest {
             writer.write("1 G N\n");
             // comandes invalide
             writer.write(
-"AGD 1\n");
+                    "AGD 1\n");
         }
 
         builder = new DeployementTendeuseBuilder(tempFile);
@@ -55,7 +55,7 @@ public class DeployementTendeuseBuilderTest {
         assertNotNull(tondeuse.getPosition());
         assertEquals(1, tondeuse.getPosition().getX());
         assertEquals(2, tondeuse.getPosition().getY());
-        assertEquals(PointCardinal.NORD, tondeuse.getOrientation());
+        assertEquals(Orientation.NORD, tondeuse.getOrientation());
 
     }
 
@@ -63,8 +63,8 @@ public class DeployementTendeuseBuilderTest {
     @Test
     @Order(3)
     void buildCommandesTendeuse_dataCorrect_ShouldReturnCommandes() {
-       String commandesTondeuse =  builder.buildCommandesTendeuse();
-       assertEquals("AGD", commandesTondeuse);
+        String commandesTondeuse = builder.buildCommandesTendeuse();
+        assertEquals("AGD", commandesTondeuse);
     }
 
     @Test

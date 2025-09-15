@@ -1,6 +1,6 @@
 package org.example;
 
-public enum PointCardinal {
+public enum Orientation {
     NORD("N"),
     EST("E"),
     SUD("S"),
@@ -8,7 +8,7 @@ public enum PointCardinal {
 
     private final String code;
 
-    PointCardinal(String code) {
+    Orientation(String code) {
         this.code = code;
     }
 
